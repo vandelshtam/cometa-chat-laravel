@@ -32,7 +32,10 @@ class ChatController extends Controller
          $userId = auth()->user()->id;
          $message = $request->message;
 
-
+//        $roomId = 'pi7ygj2k56s';
+//  llllll
+      $userId = '2e5lbocz8ys';
+//        $message = 'test test test';
 
 
         //broadcast(new \App\Events\HelloEvent($message));
