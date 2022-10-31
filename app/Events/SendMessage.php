@@ -42,13 +42,13 @@ class SendMessage implements ShouldBroadcast
         return new PresenceChannel('chat'.$this->roomId);
     }
 
-    /**
-     * The event's broadcast name.
-     *
-     * @return string
-     */
-    public function broadcastAs()
-    {
-        return 'send.message';
-    }
+    // /**
+    //  * The event's broadcast name.
+    //  *
+    //  * @return string
+    //  */
+    // public function broadcastAs()
+    // {
+    //     return 'send.message';
+    // }
 }

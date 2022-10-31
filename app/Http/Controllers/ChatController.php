@@ -33,8 +33,7 @@ class ChatController extends Controller
          $message = $request->message;
 
 //        $roomId = 'pi7ygj2k56s';
-//  llllll
-      $userId = '2e5lbocz8ys';
+//        $userId = '2e5lbocz8ys';
 //        $message = 'test test test';
 
 
