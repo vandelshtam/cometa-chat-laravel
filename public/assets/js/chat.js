@@ -92,7 +92,7 @@ function createRoom(friendId) {
             let room = res.data.data;
             Echo.join(`chat.${room.id}`)
                 .here((users) => {
-                    console.log('join channel chat success yes');
+                    console.log(`join channel chat success yes-chat.${room.id}`);
                     document.querySelector("#type-area").addEventListener("keydown", function (e) {
                         if (e.key === 'Enter') {
                             let input = this.value;
@@ -103,24 +103,27 @@ function createRoom(friendId) {
                             }
 
                         }
+                    
                     });
+                    
                 })
                 .joining((user) => {
                     console.log(user.name);
+                    
                 })
                 .leaving((user) => {
                     console.log(user.name);
-                    console.log('join yes');
                 })
-                .listen('.send.message', (e) => {
+                .listen("SendMessage", (e) => {
                     console.log('join yes');
                     console.log(e);
-                    handelLeftMessage(e.message);
+                    //handelLeftMessage(e.message);
+                })
+                .error((error) => {
+                    console.error(error);
                 });
-            Echo.private(`chat.${room.id}`)
-                .listen('ShippingStatusUpdated', (e) => {
-                    console.log(e.update);
-                });
+
+            
             showHideChatBox(true)
         });
 

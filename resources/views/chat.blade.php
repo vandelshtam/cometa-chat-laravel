@@ -81,6 +81,7 @@
 <input type="hidden" id="message-url" value="{{ route("chat.save") }}">
 <input type="hidden" id="load-url" value="{{ route("chat.load") }}">
 @vite('resources/js/app.js')
-<script src="{{ asset("assets/js/chat.js") }}"></script>
+<!-- ✅ type set to module ✅ -->
+<script type="module" src="{{ asset("assets/js/chat.js") }}"></script>
 </body>
 </html>

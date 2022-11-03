@@ -38,7 +38,7 @@ class ChatController extends Controller
 
 
         //broadcast(new \App\Events\HelloEvent($message));
-        broadcast(new \App\Events\SendMessage($roomId, $userId, $message ));
+        broadcast(new SendMessage($roomId, $userId, $message ));
 
          Message::create([
              "room_id"=>$roomId,
