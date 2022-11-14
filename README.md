@@ -7,12 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Mini Chat Template Tutorial
-
-link youtube : [tutorial](https://youtu.be/uFrE7RzXPcc)
-
-## ERD
-![url](https://res.cloudinary.com/dk0053zbe/image/upload/v1658935067/chat-erd_lnsnvt.jpg)
+## Cometa Chat 
 
 ## How to install
 - clone this project
