@@ -52,8 +52,7 @@ php artisan websockets:serve
 - check connection websocket <br>
 http://localhost:8000/laravel-websockets
 ## NOTE
-- Learn how install laravel websockets free no paid service : 
-[Tutorial Install Laravel Websockets](https://www.youtube.com/watch?v=w8rj1C0fLgw)
+
 - Default Password user : <br>
 ```php
 password
