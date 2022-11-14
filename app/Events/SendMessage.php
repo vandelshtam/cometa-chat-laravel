@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithBroadcasting;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -13,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 
 class SendMessage implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels, InteractsWithBroadcasting;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $roomId;
     public $userId;
@@ -43,13 +42,13 @@ class SendMessage implements ShouldBroadcast
         return new PresenceChannel('chat'.$this->roomId);
     }
 
-    // /**
-    //  * The event's broadcast name.
-    //  *
-    //  * @return string
-    //  */
-    // public function broadcastAs()
-    // {
-    //     return 'send.message';
-    // }
+    /**
+     * The event's broadcast name.
+     *
+     * @return string
+     */
+    public function broadcastAs()
+    {
+        return 'message';
+    }
 }

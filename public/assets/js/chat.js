@@ -86,13 +86,15 @@ function createRoom(friendId) {
     let formData = new FormData();
     formData.append ( "friend_id", friendId);
 
+    
+
     axios.post(url, formData)
         .then(function (res) {
 
             let room = res.data.data;
             Echo.join(`chat.${room.id}`)
                 .here((users) => {
-                    console.log(`join channel chat success yes-chat.${room.id}`);
+                    console.log('join channel chat success yes');
                     document.querySelector("#type-area").addEventListener("keydown", function (e) {
                         if (e.key === 'Enter') {
                             let input = this.value;
@@ -103,28 +105,30 @@ function createRoom(friendId) {
                             }
 
                         }
-                    
                     });
-                    
+                })
+                .listen('message', (e) => {
+                    console.log('join yes');
+                    console.log(e);
+                    // handelLeftMessage(e.message);
                 })
                 .joining((user) => {
                     console.log(user.name);
-                    
                 })
                 .leaving((user) => {
                     console.log(user.name);
                 })
-                .listen("SendMessage", (e) => {
-                    console.log('join yes');
-                    console.log(e);
-                    //handelLeftMessage(e.message);
-                })
-                .error((error) => {
-                    console.error(error);
+                ;
+            Echo.private(`chat.${room.id}`)
+                .listen('ShippingStatusUpdated', (e) => {
+                    console.log(e.update);
                 });
-
-            
             showHideChatBox(true)
+
+            Echo.channel(`chat.${room.id}`)
+            .listen('sendMessage', (e) => {
+                console.log(e.order.name);
+            });   
         });
 
 }
