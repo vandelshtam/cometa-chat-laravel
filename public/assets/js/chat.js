@@ -92,9 +92,16 @@ function createRoom(friendId) {
         .then(function (res) {
 
             let room = res.data.data;
+            
             Echo.join(`chat.${room.id}`)
                 .here((users) => {
                     console.log('join channel chat success yes');
+                    document.addEventListener("DOMContetntLoaded", function (event) {
+                        Echo.channel(`chat.${room.id}`)
+                        .listen('SendMessage', (e) => {
+                            console.log(e);
+                        });     
+                    });
                     document.querySelector("#type-area").addEventListener("keydown", function (e) {
                         if (e.key === 'Enter') {
                             let input = this.value;
@@ -103,11 +110,11 @@ function createRoom(friendId) {
 
                                 this.value = ""
                             }
-
+                            
                         }
                     });
                 })
-                .listen('message', (e) => {
+                .listen('SendMessage', (e) => {
                     console.log('join yes');
                     console.log(e);
                     // handelLeftMessage(e.message);
@@ -117,8 +124,7 @@ function createRoom(friendId) {
                 })
                 .leaving((user) => {
                     console.log(user.name);
-                })
-                ;
+                });
             Echo.private(`chat.${room.id}`)
                 .listen('ShippingStatusUpdated', (e) => {
                     console.log(e.update);
@@ -127,7 +133,7 @@ function createRoom(friendId) {
 
             Echo.channel(`chat.${room.id}`)
             .listen('sendMessage', (e) => {
-                console.log(e.order.name);
+                console.log(e.order);
             });   
         });
 

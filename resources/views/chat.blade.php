@@ -82,5 +82,12 @@
 <input type="hidden" id="load-url" value="{{ route("chat.load") }}">
 @vite('resources/js/app.js')
 <script src="{{ asset("assets/js/chat.js") }}"></script>
+{{--  <script>
+    Echo.channel(`private-chat.4hj86h3gmoi`)
+            .listen('SendMessage', (e) => {
+                console.log('message');
+                console.log(e.order);
+            });   
+</script>  --}}
 </body>
 </html>
