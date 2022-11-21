@@ -156,7 +156,7 @@ function loagMessage(roomId, friendId, avatar){
                 .then(function(res){
                     //console.log(res)
                 let data = res.data.data;
-                console.log(data)  
+                //console.log(data)  
                 if(data.length > 0){
                     data.forEach(function(value){
                         if(value.user_id == friendId){
