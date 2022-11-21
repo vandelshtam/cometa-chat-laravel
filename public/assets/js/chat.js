@@ -1,3 +1,7 @@
+//const { default: axios } = require("axios");
+
+//const { data } = require("autoprefixer");
+
 document.addEventListener("DOMContentLoaded", function (e) {
     // document.querySelector("#type-area").addEventListener("keydown", function (e) {
     //     if (e.key === 'Enter') {
@@ -19,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             // set chat room properties
             document.querySelector(".friend-name").innerHTML = name
             document.querySelector(".header-img").innerHTML = `<img src="${avatar}" />`;
-            createRoom(id)
+            createRoom(id, avatar)
         });
     });
 });
@@ -81,7 +85,7 @@ function showHideChatBox(show) {
     }
 }
 
-function createRoom(friendId) {
+function createRoom(friendId,avatar) {
     let url = document.getElementById("room-url").value;
     let formData = new FormData();
     formData.append ( "friend_id", friendId);
@@ -96,6 +100,7 @@ function createRoom(friendId) {
             Echo.join(`chat.${room.id}`)
                 .here((users) => {
                     console.log('join channel chat success yes');
+                    loagMessage(room.id,friendId, avatar)
                     document.addEventListener("DOMContetntLoaded", function (event) {
                         Echo.channel(`chat.${room.id}`)
                         .listen('SendMessage', (e) => {
@@ -117,7 +122,10 @@ function createRoom(friendId) {
                 .listen('SendMessage', (e) => {
                     console.log('join yes');
                     console.log(e);
-                    // handelLeftMessage(e.message);
+                    if(e.userId == friendId){
+                        handelLeftMessage(e.message,avatar);
+                    }
+                    
                 })
                 .joining((user) => {
                     console.log(user.name);
@@ -135,6 +143,37 @@ function createRoom(friendId) {
             .listen('sendMessage', (e) => {
                 console.log(e.order);
             });   
-        });
+        });       
 
+}
+
+
+function loagMessage(roomId, friendId, avatar){
+            let url = document.getElementById("load-chat-url").value;
+                url = url.replace(":roomId", roomId)
+              
+            axios.get(url)
+                .then(function(res){
+                    //console.log(res)
+                let data = res.data.data;
+                console.log(data)  
+                if(data.length > 0){
+                    data.forEach(function(value){
+                        if(value.user_id == friendId){
+                            handelLeftMessage(value.message,avatar);
+                        }
+                        else{
+                            let html = ' <div id="your-chat" class="your-chat">\n' +
+                    '                <p class="your-chat-balloon">'+ value.message +'</p>\n' +
+                    '            </div>';
+                            var chatBody = document.querySelector("#chat-area");
+                            chatBody.insertAdjacentHTML("beforeend", html);
+                            chatBody.scrollTo({ left: 0, top: chatBody.scrollHeight, behavior: "smooth" });
+                        }
+                    })
+                }
+                else{
+                    document.querySelector("#chat-area").innerHTML = "<p style='text-align:center'>Nothing in chat</p>"
+                }
+                });
 }

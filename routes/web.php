@@ -23,13 +23,13 @@ Route::middleware("guest")->group(function (){
 
 Route::middleware("auth")->group(function (){
     // chat
-    Route::prefix("chat")->name("chat.")->group(function (){
-        Route::get("/", [ChatController::class, "index"])->name("index");
+    // Route::prefix("chat")->name("chat.")->group(function (){
+    //     Route::get("/", [ChatController::class, "index"])->name("index");
 
-        Route::post('/save', [ChatController::class, "saveMessage"])->name('save');
-        Route::get('/load', [ChatController::class, "loadMessage"])->name('load');
+    //     Route::post('/save', [ChatController::class, "saveMessage"])->name('save');
+    //     //Route::get('/load/{roomId}', [ChatController::class, "loadMessage"])->name('load');
 
-    });
+    // });
     //room
     Route::get('/me', [RoomController::class, "me"])->name('room.me');
     Route::post('/room', [RoomController::class, "create"])->name('room.create');
@@ -38,3 +38,10 @@ Route::middleware("auth")->group(function (){
     Route::get("/logout", [LoginController::class, "logout"])->name("logout");
 });
 
+Route::prefix("chat")->name("chat.")->group(function (){
+    Route::get("/", [ChatController::class, "index"])->name("index");
+
+    Route::post('/save', [ChatController::class, "saveMessage"])->name('save');
+    Route::get('/load/{roomId}', [ChatController::class, "loadMessage"])->name('load');
+
+});

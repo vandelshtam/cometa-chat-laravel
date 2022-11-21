@@ -79,7 +79,7 @@
 {{-- url --}}
 <input type="hidden" id="room-url" value="{{ route("room.create") }}">
 <input type="hidden" id="message-url" value="{{ route("chat.save") }}">
-<input type="hidden" id="load-url" value="{{ route("chat.load") }}">
+<input type="hidden" id="load-chat-url" value="{{ route("chat.load", ["roomId" => ":roomId"]) }}">
 @vite('resources/js/app.js')
 <script src="{{ asset("assets/js/chat.js") }}"></script>
 {{--  <script>

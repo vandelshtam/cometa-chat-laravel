@@ -60,8 +60,8 @@ class ChatController extends Controller
      * @return Illuminate\Http\jsonResponse
      */
 
-    public function LoadMessage(){
-        $message = Message::where("room_id", 1)->orderBy("id", "asc")->get();
+    public function LoadMessage($roomId){
+        $message = Message::where("room_id", $roomId)->orderBy("id", "asc")->get();
         return response()->json([
             "success" => true,
             "data" => $message,
