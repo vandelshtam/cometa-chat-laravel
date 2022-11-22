@@ -142,9 +142,13 @@ function createRoom(friendId,avatar) {
             Echo.channel(`chat.${room.id}`)
             .listen('sendMessage', (e) => {
                 console.log(e.order);
-            });   
+            }); 
+            
         });       
-
+Echo.channel(`chat.hio6h073huo`)
+    .listen('SendMessage', (e) => {
+        console.log(e.order.name);
+    });  
 }
 
 
