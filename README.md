@@ -12,8 +12,8 @@
 
 
 ## Applied technologies:
-### websockets:
-https://dashboard.pusher.com/
+### laravel-websockets:
+https://beyondco.de/docs/laravel-websockets/getting-started/introduction
 
 ## How to install
 - clone this project
